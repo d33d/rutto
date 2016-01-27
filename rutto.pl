@@ -32,7 +32,7 @@ Mojo::IOLoop->server(
           #### TLS
           if ($buffer =~ /CONNECT (\S+):(\d+)?/) {
             my $address = $1;
-            my $port = $2 || 80;
+            my $port    = $2 || 80;
 
             say "TLS";
 
@@ -104,10 +104,6 @@ Mojo::IOLoop->server(
                 # Start forwarding data in both directions
                 say "\n\n[****] CLIENT >>>>> SERVER $address:$port";
                 $stream->write($req->to_string);
-
-                ### TLS with CONNECT request....
-                #Mojo::IOLoop->stream($client)->write("HTTP/1.1 200 OK\x0d\x0a" . "Connection: keep-alive\x0d\x0a\x0d\x0a");
-                #Mojo::IOLoop->stream($server)->write($req->to_string);
                 
                 $stream->on(
                   read => sub {
@@ -133,7 +129,7 @@ Mojo::IOLoop->server(
 
           }
         }
-        
+
       }
 
     );
